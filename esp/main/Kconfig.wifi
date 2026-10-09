@@ -1,0 +1,66 @@
+menu "TIC3 - WiFi por prioridad"
+    config TIC3_WIFI_ENABLE
+        bool "Activar cliente WiFi con seleccion automatica de perfiles"
+        default n
+    config TIC3_WIFI_CONNECT_TIMEOUT_S
+        int "Tiempo maximo de autenticacion y DHCP por intento"
+        range 5 30
+        default 15
+    config TIC3_WIFI_1_ENABLE
+        bool "Habilitar perfil prioridad 1: AP Raspberry"
+        default y
+    config TIC3_WIFI_1_SSID
+        string "SSID exacto de la Raspberry"
+        default "TIC3-Raccoon"
+    config TIC3_WIFI_1_OPEN
+        bool "Perfil 1: red abierta sin clave"
+        default n
+    config TIC3_WIFI_1_PASSWORD
+        string "Perfil 1: clave PSK (8 a 63 caracteres; vacia si abierta)"
+        default ""
+    config TIC3_WIFI_1_SERVER
+        string "Perfil 1: IP/nombre del servidor Raspberry"
+        default "192.168.50.1"
+    config TIC3_WIFI_1_PORT
+        int "Perfil 1: puerto de datos"
+        range 1 65535
+        default 5001
+    config TIC3_WIFI_2_ENABLE
+        bool "Habilitar perfil prioridad 2: laboratorio"
+        default n
+    config TIC3_WIFI_2_SSID
+        string "SSID exacto del laboratorio"
+        default ""
+    config TIC3_WIFI_2_OPEN
+        bool "Perfil 2: red abierta sin clave"
+        default n
+    config TIC3_WIFI_2_PASSWORD
+        string "Perfil 2: clave PSK (8 a 63 caracteres; vacia si abierta)"
+        default ""
+    config TIC3_WIFI_2_SERVER
+        string "Perfil 2: IP/nombre de Raspberry EN ESA RED"
+        default ""
+    config TIC3_WIFI_2_PORT
+        int "Perfil 2: puerto de datos"
+        range 1 65535
+        default 5001
+    config TIC3_WIFI_3_ENABLE
+        bool "Habilitar perfil prioridad 3: WiFi actual"
+        default y
+    config TIC3_WIFI_3_SSID
+        string "SSID exacto del tercer perfil"
+        default "WIFI_COMPARTIDO"
+    config TIC3_WIFI_3_OPEN
+        bool "Perfil 3: red abierta sin clave"
+        default n
+    config TIC3_WIFI_3_PASSWORD
+        string "Perfil 3: clave PSK (8 a 63 caracteres; vacia si abierta)"
+        default ""
+    config TIC3_WIFI_3_SERVER
+        string "Perfil 3: IP/nombre de Raspberry EN ESA RED"
+        default "192.0.2.10"
+    config TIC3_WIFI_3_PORT
+        int "Perfil 3: puerto de datos"
+        range 1 65535
+        default 5001
+endmenu

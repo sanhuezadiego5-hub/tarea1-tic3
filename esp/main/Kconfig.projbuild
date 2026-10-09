@@ -1,0 +1,63 @@
+menu "TIC3 - bloques IMU"
+    config TIC3_ACCEL_HZ
+        int "ODR acelerometro (25, 50, 100, 200 o 400 Hz)"
+        range 25 400
+        default 400
+    config TIC3_GYRO_HZ
+        int "ODR giroscopio (25, 50, 100, 200 o 400 Hz)"
+        range 25 400
+        default 400
+    config TIC3_PRINT_ARRAYS
+        bool "Imprimir arreglos completos como JSON por consola"
+        default n
+        help
+            Si esta desactivado se imprime solo un resumen de cada bloque.
+            Para dos sensores a 400 Hz usar UART >= 460800 baud o USB.
+            La consola es un transporte de prueba, no un cliente WiFi.
+    config TIC3_INTERVAL_MS
+        int "Intervalo de cierre/envio de bloques (milisegundos)"
+        range 100 60000
+        default 1000
+        help
+            1000 = 1 segundo; 5000 = 5 segundos. Los buffers se dimensionan
+            segun la ODR de cada flujo. Configuraciones que excedan 128 KiB
+            para pools o la RAM disponible se rechazan antes de adquirir.
+    config TIC3_BLOCKS_PER_STREAM
+        int "Bloques por parametro (incluye el activo)"
+        range 2 4
+        default 2
+    choice TIC3_WIRE_FORMAT
+        prompt "Formato del protocolo de datos"
+        default TIC3_FORMAT_BINARY
+        config TIC3_FORMAT_BINARY
+            bool "Binario"
+        config TIC3_FORMAT_JSON
+            bool "JSON"
+    endchoice
+    config TIC3_WIRE_CONSOLE
+        bool "Salida del protocolo por consola, en lugar de resumen/JSON de depuracion"
+        default n
+        help
+            Activa el formato binario o JSON elegido, con prefijo de longitud.
+            Para capturar binario, usar logs ESP desactivados y consola rapida.
+            Esto no establece una conexion con Raspberry.
+endmenu
+rsource "Kconfig.wifi"
+menu "TIC3 - envio a Raspberry"
+    config TIC3_NETWORK_SEND
+        bool "Enviar bloques al servidor IMU por sockets"
+        depends on TIC3_WIFI_ENABLE
+        default n
+    choice TIC3_DATA_TRANSPORT
+        prompt "Transporte de datos"
+        default TIC3_TRANSPORT_TCP
+        config TIC3_TRANSPORT_TCP
+            bool "TCP con ACK de bloque guardado"
+        config TIC3_TRANSPORT_UDP
+            bool "UDP sin retransmision de datos"
+    endchoice
+    config TIC3_CONTROL_PORT
+        int "Puerto TCP de control/probe para UDP"
+        range 1 65535
+        default 5000
+endmenu
