@@ -77,4 +77,4 @@ El script usa un compilador C (`cc`) y Python 3, genera fixtures temporales y co
 
 Los directorios `build*`, el bootloader generado, CMakeFiles, cachés, `sdkconfig`, contraseñas, claves SSH y nuevas capturas no forman parte del repositorio. ESP-IDF vuelve a generar los archivos de compilación a partir de CMake y del código fuente. Se incluyen los archivos necesarios para reproducir el proyecto, no los binarios que contienen la configuración privada de la instalación.
 
-Las direcciones `192.0.2.x`, el usuario `usuario` y las rutas `/ruta/...` son ejemplos para documentación; reemplazarlos por los valores locales. La subred `192.0.2.20/24` es la configuración del AP definida por el código. El historial publicado omite identificadores de red y rutas personales.
+Las direcciones `192.0.2.x`, el usuario `usuario` y las rutas `/ruta/...` son ejemplos para documentación; reemplazarlos por los valores locales. La configuración real del AP está definida en `raspi/setup_ap.py`. El historial publicado omite identificadores de red y rutas personales.
