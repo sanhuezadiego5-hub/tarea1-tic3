@@ -1,0 +1,214 @@
+[
+  {
+    "session": {
+      "id": "8d71c32d62e2450aa3b394a9815fe1dd",
+      "device": "00001cdbd4665454",
+      "boot": "e9367d7602af1f9c",
+      "requested_start_utc": "2026-10-08T03:40:51.006215+00:00",
+      "result": "target_reached_and_saved",
+      "samples": {
+        "acceleration": 250,
+        "angular_velocity": 125
+      },
+      "blocks": {
+        "acceleration": 5,
+        "angular_velocity": 5
+      },
+      "first_window": 0,
+      "last_window": 4,
+      "window_begin": 0,
+      "configuration": {
+        "accel_hz": 100,
+        "gyro_hz": 50,
+        "accel_range": 4,
+        "gyro_range": 500,
+        "interval_ms": 500,
+        "accel_samples": 250,
+        "gyro_samples": 125,
+        "mode": "parallel",
+        "transport": "tcp",
+        "format": "binary",
+        "blocks": 2
+      },
+      "started_confirmed_utc": "2026-10-08T03:40:51.128889+00:00",
+      "requested_stop_utc": "2026-10-08T03:40:53.782462+00:00",
+      "automatic_stop": true,
+      "ended_utc": "2026-10-08T03:40:53.782477+00:00",
+      "window_end_exclusive": 5
+    },
+    "acquired": {
+      "acceleration": 250,
+      "angular_velocity": 125
+    },
+    "saved": {
+      "acceleration": 250,
+      "angular_velocity": 125
+    },
+    "blocks": 10,
+    "counters_max": {
+      "output_dropped_blocks": 0,
+      "buffer_dropped": 0,
+      "fifo_errors": 0,
+      "i2c_errors": 0
+    }
+  },
+  {
+    "session": {
+      "id": "403aedd881db4903a1236d851c8a749f",
+      "device": "00001cdbd4665454",
+      "boot": "e9367d7602af1f9c",
+      "requested_start_utc": "2026-10-08T03:40:54.765936+00:00",
+      "result": "stopped_udp_unconfirmed",
+      "samples": {
+        "acceleration": 300,
+        "angular_velocity": 150
+      },
+      "blocks": {
+        "acceleration": 3,
+        "angular_velocity": 3
+      },
+      "first_window": 5,
+      "last_window": 7,
+      "window_begin": 5,
+      "configuration": {
+        "accel_hz": 200,
+        "gyro_hz": 100,
+        "accel_range": 2,
+        "gyro_range": 250,
+        "interval_ms": 500,
+        "accel_samples": 300,
+        "gyro_samples": 150,
+        "mode": "sequential",
+        "transport": "udp",
+        "format": "json",
+        "blocks": 2
+      },
+      "started_confirmed_utc": "2026-10-08T03:40:54.911878+00:00",
+      "requested_stop_utc": "2026-10-08T03:40:57.091787+00:00",
+      "automatic_stop": true,
+      "ended_utc": "2026-10-08T03:40:57.091806+00:00",
+      "window_end_exclusive": 8
+    },
+    "acquired": {
+      "acceleration": 300,
+      "angular_velocity": 150
+    },
+    "saved": {
+      "acceleration": 300,
+      "angular_velocity": 150
+    },
+    "blocks": 6,
+    "counters_max": {
+      "output_dropped_blocks": 0,
+      "buffer_dropped": 0,
+      "fifo_errors": 0,
+      "i2c_errors": 0
+    }
+  },
+  {
+    "session": {
+      "id": "dd97a71e13a949949dd50ffdafd6aabf",
+      "device": "00001cdbd4665454",
+      "boot": "e9367d7602af1f9c",
+      "requested_start_utc": "2026-10-08T03:40:58.098954+00:00",
+      "result": "target_reached_and_saved",
+      "samples": {
+        "acceleration": 120,
+        "angular_velocity": 60
+      },
+      "blocks": {
+        "acceleration": 3,
+        "angular_velocity": 3
+      },
+      "first_window": 8,
+      "last_window": 10,
+      "window_begin": 8,
+      "configuration": {
+        "accel_hz": 50,
+        "gyro_hz": 25,
+        "accel_range": 16,
+        "gyro_range": 1000,
+        "interval_ms": 1000,
+        "accel_samples": 120,
+        "gyro_samples": 60,
+        "mode": "sequential",
+        "transport": "tcp",
+        "format": "binary",
+        "blocks": 2
+      },
+      "started_confirmed_utc": "2026-10-08T03:40:58.306839+00:00",
+      "requested_stop_utc": "2026-10-08T03:41:01.291814+00:00",
+      "automatic_stop": true,
+      "ended_utc": "2026-10-08T03:41:01.291834+00:00",
+      "window_end_exclusive": 11
+    },
+    "acquired": {
+      "acceleration": 120,
+      "angular_velocity": 60
+    },
+    "saved": {
+      "acceleration": 120,
+      "angular_velocity": 60
+    },
+    "blocks": 6,
+    "counters_max": {
+      "output_dropped_blocks": 0,
+      "buffer_dropped": 0,
+      "fifo_errors": 0,
+      "i2c_errors": 0
+    }
+  },
+  {
+    "session": {
+      "id": "2fe9191420cb437b9e7a3a45a0e4577f",
+      "device": "00001cdbd4665454",
+      "boot": "e9367d7602af1f9c",
+      "requested_start_utc": "2026-10-08T03:41:02.321892+00:00",
+      "result": "stopped_udp_unconfirmed",
+      "samples": {
+        "acceleration": 50,
+        "angular_velocity": 50
+      },
+      "blocks": {
+        "acceleration": 1,
+        "angular_velocity": 1
+      },
+      "first_window": 11,
+      "last_window": 11,
+      "window_begin": 11,
+      "configuration": {
+        "accel_hz": 100,
+        "gyro_hz": 100,
+        "accel_range": 8,
+        "gyro_range": 2000,
+        "interval_ms": 1000,
+        "accel_samples": 50,
+        "gyro_samples": 50,
+        "mode": "parallel",
+        "transport": "udp",
+        "format": "binary",
+        "blocks": 2
+      },
+      "started_confirmed_utc": "2026-10-08T03:41:02.490176+00:00",
+      "requested_stop_utc": "2026-10-08T03:41:03.151501+00:00",
+      "automatic_stop": true,
+      "ended_utc": "2026-10-08T03:41:03.151519+00:00",
+      "window_end_exclusive": 12
+    },
+    "acquired": {
+      "acceleration": 50,
+      "angular_velocity": 50
+    },
+    "saved": {
+      "acceleration": 50,
+      "angular_velocity": 50
+    },
+    "blocks": 2,
+    "counters_max": {
+      "output_dropped_blocks": 0,
+      "buffer_dropped": 0,
+      "fifo_errors": 0,
+      "i2c_errors": 0
+    }
+  }
+]

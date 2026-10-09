@@ -1,0 +1,50 @@
+{
+  "network": "TIC3-Raccoon",
+  "server": "192.168.50.1",
+  "session": {
+    "id": "d717f30d4a7940e8aed0a1ad74f8b49e",
+    "device": "00001cdbd4665454",
+    "boot": "5ec7ecc713f739a9",
+    "requested_start_utc": "2026-10-09T22:15:28.739726+00:00",
+    "result": "target_reached_and_saved",
+    "samples": {
+      "acceleration": 250,
+      "angular_velocity": 125
+    },
+    "blocks": {
+      "acceleration": 5,
+      "angular_velocity": 5
+    },
+    "first_window": 0,
+    "last_window": 4,
+    "window_begin": 0,
+    "configuration": {
+      "accel_hz": 100,
+      "gyro_hz": 50,
+      "accel_range": 4,
+      "gyro_range": 500,
+      "interval_ms": 500,
+      "accel_samples": 250,
+      "gyro_samples": 125,
+      "mode": "parallel",
+      "transport": "tcp",
+      "format": "binary",
+      "blocks": 2
+    },
+    "started_confirmed_utc": "2026-10-09T22:15:28.861689+00:00",
+    "requested_stop_utc": "2026-10-09T22:15:31.475634+00:00",
+    "automatic_stop": true,
+    "ended_utc": "2026-10-09T22:15:31.475649+00:00",
+    "window_end_exclusive": 5
+  },
+  "saved": {
+    "acceleration": 250,
+    "angular_velocity": 125
+  },
+  "blocks": 10,
+  "counters_max": {
+    "output_dropped_blocks": 0,
+    "fifo_errors": 0,
+    "i2c_errors": 0
+  }
+}
