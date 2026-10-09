@@ -1,0 +1,15 @@
+Frecuencias de muestreo
+Longitud de arreglos
+considerar que en los arreglos también se mandan ips
+Enviar distintos arreglos a distintas frecuencias dependeidndo de las frecunecias de muestreo
+O empaquetarlos en json o binario
+
+Hay que decidir a que wifi conectarse, eldel lab,de la raspi o podemos hacer una lista de wifi en la esp32 para quese vaya conectando por prioiridad
+¿Qué hace la esp cuando falla el wifi? ¿Intenta de nuevo sola? ¿Hay que ingresar una clave por teclado o hacer algo manual?
+
+¿Si hay más de un puerto igual? ¿Cómo se soluciona la conexión que hace la raspi? ¿Hay que confirmar el puertpo?
+¿Si falla el envío de la info que se hace, sigue el procesoo se intenta denuevo?
+¿La ip de la raspi serámanual automática o como?
+¿Usaremos los dos core del esp para la misma trarea o usaremos uno para medir y hacer el array y otro  para enviar? LA esp tiene dos cores
+Es mejor hacerlo en paralelo porque no se pierden paquetes de datos por posibles errores. Es decir usamos dos cores por tareas distintas. Ambas son válidas
+
