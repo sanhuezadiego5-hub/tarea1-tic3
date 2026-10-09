@@ -1,0 +1,17 @@
+# Credenciales y configuración local
+sdkconfig
+sdkconfig.old
+.ap_credentials.json
+.env
+.env.*
+*.pem
+*.key
+# Generados por ESP-IDF y Python
+build/
+build-*/
+managed_components/
+__pycache__/
+*.py[cod]
+*.log
+# Nuevas capturas de ejecución; las muestras curadas están en datos_ejemplo/
+sensores/
