@@ -1,0 +1,107 @@
+REGISTRO DE PROMPTS DE LA TAREA 1 DE TIC 3
+
+Recopilación preparada el 12 de octubre de 2026.
+Los mensajes siguientes provienen de la conversación disponible. Se mantienen repeticiones, erratas y aclaraciones.
+
+PROMPT 
+============================================================
+Necesito llevar a cabo la tarea 1 de TIC 3, empezaré desarrollando la parte de la esp32, por lo que quiero dejar definido todo para luego hacer el envío de datos a la raspi. Tengo el código del sensor de aceleración bmi, quiero dejar definido desde ya todas las consideraciones que debo tomar, como la frecuencia de muestreo con la cual la esp toma o printea una muestra, ya sea de aceleración, velocidad o cualquier dato que capte la esp con el sensor bmi, también por ejemplo si es que la esp usará un core para los arreglos y para enviar la información, o si es que usará un core para los arreglos y el otro core para el envío de datos y toma consideraciones como estas para lo mismo:
+Frecuencias de muestreo
+Longitud de arreglos
+considerar que en los arreglos también se mandan ip
+Enviar distintos arreglos a distintas frecuencias dependeidndo de las frecunecias de muestreo
+O empaquetarlos en json o binario
+
+Hay que decidir a que wifi conectarse, eldel lab,de la raspi o podemos hacer una lista de wifi en la esp32 para quese vaya conectando por prio>
+¿Qué hace la esp cuando falla el wifi? ¿Intenta de nuevo sola? ¿Hay que ingresar una clave por teclado o hacer algo manual?
+
+¿Si hay más de un puerto igual? ¿Cómo se soluciona la conexión que hace la raspi? ¿Hay que confirmar el puertpo?
+¿Si falla el envío de la info que se hace, sigue el procesoo se intenta denuevo?
+¿La ip de la raspi serámanual automática o como?
+¿Usaremos los dos core del esp para la misma trarea o usaremos uno para medir y hacer el array y otro  para enviar? LA esp tiene dos cores
+Es mejor hacerlo en paralelo porque no se pierden paquetes de datos por posibles errores. Es decir usamos dos cores por tareas distintas. Amba>
+
+PROMPT 
+============================================================
+Me parece que lo mejor es almacenar y enviar arreglos por separado, es decir, las aceleraciones en un arreglo considerando sus muestras, correspondientes a la frecuencia de muestreo definida para ese parámetro, en otro arreglo la velocidad angular y así con todos los parámetros que se midan, considerando que si hacemos el envío se hace cada 1 segundo y medimos a 400 de frecuencia,para el arreglo de aceleraciones que se enviará a la raspi, se tengan 1200 muestras, considerando que las aceleraciones en los tres ejes. Te doy el permiso para modificar mi código según lo que te estoy pidiendo. Índicame en cada modificación, que fue lo que cambiaste y explícamelo
+
+PROMPT 
+============================================================
+¿Entonces ahora la esp arma arreglos separados por el tipo de dato, los cuales tienen distintas muestras o frecuencias de muestreo, y luego el envío de los arreglos a la raspi (que se hace enviando en binario) cada 1 segundo? ¿Indicaste que decisión toma el código si es que la conexión falla, o si verifica el puerto antes de conectarse o cuidaste lo que pasa si cambio la frecuencia de envío de datos de 1 segundo a 5 por ejemplo u otro valor cualquiera, para que no se desconfigure? Todo ese tipo de decisiones tienen que estar establecidas. Explícame después lo que se definió y las decisiones que se tomaron y por qué
+
+
+
+PROMPT 
+============================================================
+Cambié de wifi, la ip de mi raspi ahora es distinta
+me conectaré nuevamente por ssh desde este pc con la raspi para controlar todo, dame el comando bash para conectarme, luego quiero que me expliques brevemente ¿Qué hace cada cosa que está en la carpeta de mi proyecto, que son todos esos archivos además del main, como el cmake, gitignore,devcontainer, bootloader Cmake files cmake lists, etc para que son todos esos archivos extra aparte del código main y por qué los tengo ahí para que se usan?
+
+PROMPT 
+============================================================
+¿Qué wifise usará entonces, el que emite la raspi o al cual están conectados ambos dispositivos? En caso de que se pueda usar cualquiera sería bueno que hicieras una lista de wifi a los que el cliente puede conectarse, estableciendo prioridades, por ejemplo el de la misma raspi si es detectado prioridad 1, si no el wifi llamado lab sistemas de comunicaciones y así
+
+
+
+PROMPT 
+============================================================
+¿Cómo funciona el wifi que emite la raspi? ¿Se debe activar y funciona como cualquier otra red wifi? ¿Es este lo suficientemente bueno o estable para lo que requiero?
+
+
+
+PROMPT 
+============================================================
+[Respuesta del usuario sobre menuconfig y ESP-IDF]
+Intenté hacer lo que me dijiste en la terminal pero no me dejó, me dijo que no reconoce el comando idf.py ¿Qué es lo que se está haciendo y cuál es la diferencia entre lo de ahora y configrar el AP?
+
+
+
+PROMPT 
+============================================================
+Ya ejecuté eso en la terminal con ssh, si es necesario puedo proceder con la configuración del AP en una terminal de la raspi
+
+PROMPT 
+============================================================
+[Respuesta del usuario sobre ampliar los buffers]
+¿Qué diferencia hay en esto y qué es una ventana en el proceso? explícamelo en función de los arreglos y el envío de datos etc.
+
+
+PROMPT 
+============================================================
+Secuencial y paralelo se refiere a hacer todo en un solo core o dividirse en dos, secuencial sería en un solo core procesar los datos del sensor hacer los arreglos y enviarlos, en paralelo se dividirían las funciones de los arreglos y el envío entre los dos cores
+
+
+PROMPT 
+============================================================
+Desactivé momentáneamente el hotspot de la raspi, lo activaré de nuevo cuando tenga que conectarme a la raspi con ese método
+
+PROMPT 
+============================================================
+Quiero probar de forma manual si funciona todo, primero usando el wifi común con internet y luego usando el wifi propio que emite la raspi. Dime todos los pasos a seguir en mi pc y en la raspi para hacerlo. Dime como hacerlo si quiero usar vscode y la interfaz de la raspi (Corriendo los códigos de forma manual usando visual studio), como hacerlo por terminal y explicarme paso a paso lo que debo hacer en cualquiera de los procedimientos, los cuales finalmente buscan lograr lo mismo que es enviar los datos del sensor a la raspi y que esta los guarde como archivo y luego despliegue una GUI
+
+PROMPT 
+============================================================
+¿Como paro la medición desde la terminal?
+
+
+
+PROMPT 
+============================================================
+Al ejecutar el primer comando me devolvió `HTTP/1.0` 501 Unsupported method ("HEAD")
+
+PROMPT 
+============================================================
+Me devolvió lo que dijiste, pero al intentar ingresar a la página desde mi pc me dice: S**in conexión de control; estado sin confirmar. Dame el proceso para llevar a cabo esto usando el AP nuevamente**
+
+PROMPT
+============================================================
+No me funciona, creo que es porque la esp32 sigue buscando conectarse a wifimesh en vez de el AP de la raspi. ¿Cómo cambio la prioridad o como las ordeno o algo? ¿Si la raspi está conectada a un wifi, este debe ser el mismo de mi pc al cual está conectado por usb o cada uno puede tener su propio wifi?
+
+
+
+PROMPT 
+============================================================
+Ahora quiero que hagas tres documentos. El primer documento debe contener todos los comandos bash necesarios o que podría usar para llevar a cabo la tarea, es decir, los comandos en la raspi para iniciar el servidor sin configurar nada, para iniciar el servidor configurando cosas en el mismo comando (como puerto o la carpeta de salida), para configurar el hotspot, para conectarme a algún wifi, para modificar algún parámetro de la interfaz y cualquier comando que podría usar o que haya usado en la raspi durante el proceso de la tarea. También los comandos que uso en el pc para conectarme por ssh a la raspi, para correr el código de la esp, buildearlo flashearlo, configurar cosas, cambiar cosas, conectarme a wifi e igual que en la raspi cualquier comando bash que usé durante la tarea o podría servirme para ejecutar el proceso de la tarea.
+El segundo documento debe tener todo el funcionamiento de la tarea, formato configuraciones y demás, debe incluir como funcionan los arreglos, en que formato están, que pasa con las muestras la frecuencia de muestreo del sensor,del código, tipo de protocolo, secuencial o paralelo, que pasa cuando no se muestrea bien un dato o que pasa en alguna situación de error, que hace el código en cada caso, etc. Este documento debe ser extremadamente detallado y debe incluir todo el marco teórico de como funciona el sensor, como funciona lo que hace la esp, como funciona el envío de datos, como funciona lo que hace la raspi, incluyendo configuraciones, formatos, reglas, etc. Este debe ser sumamente detallado y debe en general dejarme preparado para responder cualquier pregunta de mi tarea, puedes tomar como consideración el documento llamado consideraciones_o_preguntas_tarea_1. Además incluye posibles preguntas que me podrían hacer en una interrogación sobre  la tarea, ya sea de código, funciones, funcionamiento del sensor, esp, raspi, servidor, protocolos, eficacia y eficiencia, por que se tomaron ciertas decisiones, etc.
+El tercer documento debe ser un documento donde se recopilen los prompts que te he hecho a ti, puede ser este simplemente un documento de texto.
+
+
