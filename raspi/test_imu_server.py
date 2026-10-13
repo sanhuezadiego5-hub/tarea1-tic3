@@ -2,6 +2,7 @@ import json
 import os
 from pathlib import Path
 import socket
+import struct
 import tempfile
 import unittest
 
@@ -27,6 +28,34 @@ def read_frame(sock):
 
 
 class IMUServerTests(unittest.TestCase):
+    def test_client_disconnect_and_bad_message_do_not_stop_listener(self):
+        """EOF, RST and invalid framing affect one client, not the listener."""
+        with tempfile.TemporaryDirectory() as folder:
+            port, control = free_port(), free_port()
+            while port == control:
+                control = free_port()
+            server = IMUServer("127.0.0.1", port, control, folder)
+            server.start()
+            def connect_hello(destination):
+                client = socket.create_connection(("127.0.0.1", destination), timeout=3)
+                client.sendall(tcp_frame(encode_control(1, 123, 456)))
+                self.assertEqual(decode_packet(read_frame(client))[0]["type"], 4)
+                return client
+            try:
+                connect_hello(port).close()
+                client = connect_hello(port)
+                client.setsockopt(socket.SOL_SOCKET, socket.SO_LINGER, struct.pack("ii", 1, 0))
+                client.close()
+                with socket.create_connection(("127.0.0.1", port), timeout=3) as bad:
+                    bad.sendall(struct.pack("!I", 999999))
+                    self.assertEqual(bad.recv(16), b"")
+                connect_hello(port).close()
+                connect_hello(control).close()
+                self.assertFalse(server.stop.is_set())
+                self.assertTrue(all(thread.is_alive() for thread in server.threads))
+            finally:
+                server.close()
+
     def test_saved_block_ack_dedup_after_restart_and_json(self):
         groups = []
         for name in ("TIC3_WIRE_FIXTURE", "TIC3_JSON_FIXTURE"):

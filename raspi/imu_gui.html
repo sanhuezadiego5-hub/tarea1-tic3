@@ -13,8 +13,8 @@
 <label>Rango aceleración · ±g<select id="accel_range"><option>2</option><option>4</option><option selected>8</option><option>16</option></select></label>
 <label>Rango giro · ±°/s<select id="gyro_range"><option>125</option><option>250</option><option>500</option><option>1000</option><option selected>2000</option></select></label>
 <label>Modo de trabajo<select id="mode"><option value="parallel">Paralelo · adquisición core 1 / envío core 0</option><option value="sequential">Secuencial · lectura, arreglos y envío core 1</option></select></label>
-<label>Muestras XYZ a adquirir · aceleración<input id="accel_samples" type="number" min="0" max="10000000" step="1" value="0" required></label>
-<label>Muestras XYZ a adquirir · giro<input id="gyro_samples" type="number" min="0" max="10000000" step="1" value="0" required></label>
+<label>Objetivo total de muestras XYZ · aceleración<input id="accel_samples" type="number" min="0" max="10000000" step="1" value="0" required></label>
+<label>Objetivo total de muestras XYZ · giro<input id="gyro_samples" type="number" min="0" max="10000000" step="1" value="0" required></label>
 <label>Protocolo de datos<select id="transport"><option value="tcp">TCP · ACK de guardado</option><option value="udp">UDP · sin ACK de datos</option></select></label>
 <label>Formato de datos<select id="format"><option value="binary">Binario</option><option value="json">JSON</option></select></label>
 <div class="settingsnote"><p class="muted">0 muestras significa captura continua. Cuando ambos objetivos son mayores que cero, la ESP se detiene después de adquirir esas cantidades. XYZ cuenta como una muestra, no como tres. Los descartes o UDP pueden reducir la cantidad recibida.</p><button id="apply" type="submit" disabled>Aplicar configuración</button><p id="configStatus" class="muted" role="status">Esperando configuración efectiva de ESP</p><p id="effective" class="details muted"></p></div>

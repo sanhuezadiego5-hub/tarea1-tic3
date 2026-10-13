@@ -1,14 +1,17 @@
 menu "TIC3 - WiFi por prioridad"
     config TIC3_WIFI_ENABLE
-        bool "Activar cliente WiFi con seleccion automatica de perfiles"
+        bool "Activar WiFi (seleccion automatica por prioridad)"
         default n
-    config TIC3_WIFI_CONNECT_TIMEOUT_S
-        int "Tiempo maximo de autenticacion y DHCP por intento"
-        range 5 30
-        default 15
+        help
+            Activado: elige automaticamente entre los perfiles habilitados,
+            en orden 1, 2, 3. Desactivado: no hay conexion WiFi ni envio
+            a Raspberry; no es un modo de seleccion manual.
+
+    menu "Perfiles WiFi habilitados"
     config TIC3_WIFI_1_ENABLE
         bool "Habilitar perfil prioridad 1: AP Raspberry"
         default y
+    menu "Datos del perfil 1: red y servidor"
     config TIC3_WIFI_1_SSID
         string "SSID exacto de la Raspberry"
         default "TIC3-Raccoon"
@@ -25,12 +28,15 @@ menu "TIC3 - WiFi por prioridad"
         int "Perfil 1: puerto de datos"
         range 1 65535
         default 5001
+    endmenu
+
     config TIC3_WIFI_2_ENABLE
         bool "Habilitar perfil prioridad 2: laboratorio"
         default n
+    menu "Datos del perfil 2: red y servidor"
     config TIC3_WIFI_2_SSID
         string "SSID exacto del laboratorio"
-        default ""
+        default "LAB.SISTEMAS DE COMUNICACIONES"
     config TIC3_WIFI_2_OPEN
         bool "Perfil 2: red abierta sin clave"
         default n
@@ -44,9 +50,12 @@ menu "TIC3 - WiFi por prioridad"
         int "Perfil 2: puerto de datos"
         range 1 65535
         default 5001
+    endmenu
+
     config TIC3_WIFI_3_ENABLE
         bool "Habilitar perfil prioridad 3: WiFi actual"
         default y
+    menu "Datos del perfil 3: red y servidor"
     config TIC3_WIFI_3_SSID
         string "SSID exacto del tercer perfil"
         default "WIFI_COMPARTIDO"
@@ -63,4 +72,13 @@ menu "TIC3 - WiFi por prioridad"
         int "Perfil 3: puerto de datos"
         range 1 65535
         default 5001
+    endmenu
+
+    menu "Opciones avanzadas de conexion"
+    config TIC3_WIFI_CONNECT_TIMEOUT_S
+        int "Tiempo maximo de autenticacion y DHCP por intento"
+        range 5 30
+        default 15
+    endmenu
+    endmenu
 endmenu

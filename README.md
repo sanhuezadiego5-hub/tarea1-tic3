@@ -9,11 +9,30 @@ Adquisición con ESP32-S3 y BMI270, envío por WiFi y almacenamiento y visualiza
 | `esp/` | Proyecto ESP-IDF: firmware C, CMake, Kconfig, pruebas y configuración de VS Code y Dev Container. |
 | `raspi/` | Servidor Python, GUI web, control remoto, configuración del AP, pruebas y reportes de verificación. |
 | `docs/` | Diseño, protocolo, decisiones WiFi y registro de desarrollo. |
-| `datos_ejemplo/` | Capturas reales y manifiestos de sesiones conservados como ejemplos. |
+| `sensores/` | Capturas reales y manifiestos de sesiones conservados como ejemplos. |
 | `referencias/` | Enunciado, material ESP-IDF y demo original del BMI270. |
 | `ejemplos_tcp/` | Cliente y servidor TCP iniciales; el sistema actual utiliza `raspi/imu_server.py`. |
 
 Esta carpeta es una copia organizada del proyecto que se probó. Las notas históricas conservan rutas de la instalación original y algunas decisiones anteriores; este README describe cómo ejecutar esta distribución.
+
+## Instalación y operación gráfica
+
+En Raspberry Pi OS con escritorio y Python 3, instalar una vez el componente Tkinter y registrar el acceso:
+
+```bash
+sudo apt update
+sudo apt install python3-tk
+bash scripts/instalar_acceso_gui.sh
+```
+
+Después abrir **TIC3 - Captura BMI270** desde el menú de aplicaciones. Pulsar **Iniciar y abrir interfaz**, esperar que aparezca la ESP, configurar los parámetros y pulsar **Iniciar captura**. Para terminar, pulsar **Detener y guardar**, esperar confirmación y cerrar el servidor desde el lanzador. No hace falta editar código ni introducir comandos para las capturas habituales.
+
+El lanzador usa Tkinter y la visualización es web local sin dependencias externas ni Internet. Si ya existe un servidor manual, usar su página o detenerlo antes de iniciar otro. Se escribe `servidor.log` en la carpeta elegida. El cierre bloquea una captura pendiente para evitar cortar el guardado; una desconexión sin confirmar exige resolverla antes de cerrar o revisar el servidor manualmente.
+
+Alternativa por terminal: `python3 raspi/launcher.py`. La instalación, el WiFi y la grabación inicial de firmware siguen siendo preparación técnica. La ESP debe tener los mismos puertos de datos/control que los elegidos en el lanzador.
+
+Para ESP-IDF, seguir la [instalación oficial para Linux](https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/get-started/linux-macos-setup.html). El proyecto se compiló con v6.1; el PC necesita ESP-IDF y acceso al puerto USB, la Raspberry no necesita ESP-IDF. Conectar SDA a GPIO42, SCL a GPIO2, alimentación 3,3 V y GND común; sensor en I2C 0x68.
+
 
 ## Ejecutar el servidor y la GUI
 
@@ -23,7 +42,7 @@ Con Python 3 en la Raspberry, desde la raíz del repositorio:
 python3 raspi/imu_server.py --host 0.0.0.0 --port 5001 --control-port 5000 --gui-port 8080 --output sensores
 ```
 
-Abrir `http://localhost:8080` en la Raspberry o `http://IP_DE_LA_RASPBERRY:8080` en un PC de la misma red. El servidor usa la biblioteca estándar de Python. Iniciar la captura desde la GUI; **Detener y guardar** cierra la sesión y guarda los bloques pendientes. `Ctrl+C` termina el servidor en la terminal. Los archivos nuevos aparecen en `sensores/`, ignorado por Git; los ejemplos incluidos permanecen en `datos_ejemplo/`.
+Abrir `http://localhost:8080` en la Raspberry o `http://IP_DE_LA_RASPBERRY:8080` en un PC de la misma red. El servidor usa la biblioteca estándar de Python. Iniciar la captura desde la GUI; **Detener y guardar** cierra la sesión y guarda los bloques pendientes. `Ctrl+C` termina el servidor en la terminal. Los archivos nuevos aparecen en `sensores/`. Se versionan cinco sesiones de prueba; las nuevas carpetas de captura se ignoran por defecto para revisarlas antes de publicarlas.
 
 En VS Code se puede abrir la carpeta del repositorio en la Raspberry, o mediante Remote SSH, y ejecutar ese mismo comando en su terminal. El servidor debe estar activo antes de iniciar una captura en la ESP.
 
@@ -64,6 +83,20 @@ Añadir `--activate` desde una terminal local de la Raspberry o con acceso alter
 - La GUI muestra valores SI y previsualización; los archivos guardan las muestras completas recibidas. El timestamp del sensor representa la lectura de FIFO, no el instante físico exacto de conversión.
 
 Detalles en [manual de GUI y control](raspi/GUI_CONTROL_AP.md), [protocolo](docs/PROTOCOLO_DATOS.md) y [diseño](docs/DISENO_ESP32_TAREA1.md). Los reportes de pruebas de hardware están en `raspi/*verified.json` y `raspi/runtime_hardware_check.json`; corresponden a sesiones distintas de los datos de ejemplo.
+
+## Entrega y arquitectura
+
+La correspondencia entre requisitos, código, datos y evidencias está en [docs/REQUISITOS_ENTREGA.md](docs/REQUISITOS_ENTREGA.md). El registro consolidado de IA está en [prompts.md](prompts.md). Las sesiones incluidas y sus parámetros están en [sensores/README.md](sensores/README.md). Wireshark y el informe corto quedan a cargo del grupo.
+
+- `esp/main/main.c`: punto de entrada.
+- `bmi270_sensor.c/.h`: capa de sensor (I2C, imagen Bosch, registros, configuración y lectura de retorno). No depende de WiFi ni sockets.
+- `imu_acquisition.c/.h`: ventanas, pools, control de captura y tareas por core.
+- `imu_stream.c`: parser FIFO, almacenamiento XYZ y conversión.
+- `imu_wifi.c`, `wifi_policy.c`: perfiles y reconexión.
+- `imu_transport.c`, `imu_wire.c`: sockets y protocolo.
+- `raspi/imu_server.py`, `imu_protocol.py`: recepción y guardado.
+- `raspi/imu_control.py`, `imu_settings.py`: órdenes y validación.
+- `raspi/imu_gui.py`, `imu_gui.html`, `launcher.py`: interfaz web y lanzador gráfico.
 
 ## Verificar sin hardware
 

@@ -13,5 +13,15 @@ managed_components/
 __pycache__/
 *.py[cod]
 *.log
-# Nuevas capturas de ejecución; las muestras curadas están en datos_ejemplo/
-sensores/
+# Capturas nuevas: versionar solo las cinco sesiones incluidas en sensores/.
+sensores/*
+!sensores/README.md
+!sensores/00001cdbd4665454_833dafbd78fd9e00/
+!sensores/sessions/
+sensores/sessions/*
+
+!sensores/sessions/6f48164914334fdfa8cf93bfac0e5198.json
+!sensores/sessions/70833adbc5d248ecaafe9f859ecda587.json
+!sensores/sessions/881331dbf0344120a49b1f05f0422c0b.json
+!sensores/sessions/ec15ed5aeb9a414eac7f417c9c0fbdb7.json
+!sensores/sessions/f8b45ad9aa37407b876f31c39167fa18.json
